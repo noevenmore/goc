@@ -17,6 +17,8 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('slug',128);
             $table->integer('category_id')->unsigned()->default(0);
+            $table->integer('length')->unsigned()->default(0);
+            $table->integer('price')->unsigned()->default(0);
             $table->string('type',32);
             $table->string('phones',128);
             $table->string('work_times',128);

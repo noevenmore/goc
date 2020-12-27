@@ -2,17 +2,31 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+function register($prefix,$class)
+{
+    Route::get('/',[\App\Http\Controllers\AdminController::class,'index'])->name('admin_index');
 
+    Route::get('/'.$prefix, [$class, 'show'])->name('admin_'.$prefix.'_show');
+    Route::get('/'.$prefix.'/edit/{id}', [$class, 'edit'])->name('admin_'.$prefix.'_edit');
+    Route::post('/'.$prefix.'/edit', [$class, 'edit_post'])->name('admin_'.$prefix.'_edit_post');
+    Route::get('/'.$prefix.'/new', [$class, 'add'])->name('admin_'.$prefix.'_add');
+    Route::post('/'.$prefix.'/new', [$class, 'add_post'])->name('admin_'.$prefix.'_add_post');
+    Route::post('/'.$prefix.'/delete', [$class, 'delete_post'])->name('admin_'.$prefix.'_delete_post');
+}
+
+Route::prefix('admin')->group(function () {
+    Route::post('/loadimage',[App\Http\Controllers\PhotoController::class,'load_image'])->name('admin_loadimage');
+    Route::post('/deleteimage',[App\Http\Controllers\PhotoController::class,'delete_image'])->name('admin_deleteimage');
+
+    register('lang',App\Http\Controllers\LangController::class);
+    register('category',App\Http\Controllers\CategoryController::class);
+    register('post',App\Http\Controllers\PostController::class);
+});
+
+
+Route::get('/',[\App\Http\Controllers\SiteController::class,'index'])->name('index');
+
+/*
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,3 +35,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/test',[App\Http\Controllers\LangController::class, 'test'])->name('test');
+*/

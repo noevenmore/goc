@@ -15,8 +15,8 @@ selected_value
 
 
 @switch($type)
-    @case('type')
-        <input type="text" name="type[]" value="{{isset($value)?$value:''}}" hidden>
+    @case('id')
+        <input type="number" name="id" value="{{isset($value)?$value:''}}" hidden>
     @break
 
     @case('label')
@@ -39,6 +39,13 @@ selected_value
         </div>
     @break
 
+    @case('stext')
+        <div class="form-group">
+            <label><strong>{{$title}}</strong></label>
+            <textarea name="{{$name}}" class="summernote" placeholder="{{isset($placeholder)?$placeholder:''}}">{{isset($value)?$value:''}}</textarea>
+        </div>
+    @break
+
     @case('number')
         <div class="form-group">
             <label><strong>{{$title}}</strong></label>
@@ -58,8 +65,8 @@ selected_value
             <label><strong>{{$title}}</strong></label>
             <select class="form-control" name="{{$name}}">
                 <option value="">-не выбрано-</option>
-                @foreach ($value as $el)
-                    <option value="{{$el['value']}}" {{isset($selected)&&$selected==$el['value']?'selected':''}}>{{$el['title']}}</option>
+                @foreach ($list as $el)
+                    <option value="{{$el['value']}}" {{isset($value)&&$value==$el['value']?'selected':''}}>{{$el['title']}}</option>
                 @endforeach
             </select>
         </div>
