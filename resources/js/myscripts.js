@@ -60,3 +60,64 @@ window.toggleMenu = function(id)
 {
     $('#menu_items_'+id).toggle();
 }
+
+window.doVisible = function(name,visible)
+{
+    if (visible) $('#'+name).show(); else $('#'+name).hide();
+}
+
+window.ShowAllFields = function()
+{
+    doVisible('fieldEmail',true);
+    doVisible('fieldLength',true);
+    doVisible('fieldLink',true);
+    doVisible('fieldPhones',true);
+    doVisible('fieldPrice',true);
+    doVisible('fieldTimeBrackets',true);
+    doVisible('fieldWorkTimes',true);
+}
+
+window.getCategoryInfo = function()
+{
+    var id = $('#category_id').val();
+
+    if (id)
+    {
+    $.ajax({
+        url:'/admin/category_info',
+        data:{
+            id: id,
+        },
+        method: 'post',
+        success: function (res)
+        {
+            var d = JSON.parse(res);
+            var success = d.success;
+
+            if (success)
+            {
+                doVisible('fieldEmail',d.data.is_show_email);
+                doVisible('fieldLength',d.data.is_show_length);
+                doVisible('fieldLink',d.data.is_show_link);
+                doVisible('fieldPhones',d.data.is_show_phone);
+                doVisible('fieldPrice',d.data.is_show_price);
+                doVisible('fieldTimeBrackets',d.data.is_show_time_brackets);
+                doVisible('fieldWorkTimes',d.data.is_show_work_times);
+            } else
+            {
+                ShowAllFields();
+            }
+
+        },
+        error: function()
+        {
+            ShowAllFields();
+        }
+    });
+    } else
+    {
+        ShowAllFields();
+    }
+}
+
+getCategoryInfo();

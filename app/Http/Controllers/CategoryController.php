@@ -97,6 +97,6 @@ class CategoryController extends Controller
 
         if (!$data) return json_encode(['success'=>false,'message'=>'not found']);
 
-        return json_encode(['success'=>true,'data'=>(array)$data]);
+        return json_encode(['success'=>true,'data'=>$data]);
     }
 }

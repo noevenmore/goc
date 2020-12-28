@@ -29,7 +29,7 @@
 
     <div class="form-group">
         <label><strong>Категория:</strong></label>
-        <select class="form-control" name="category_id">
+        <select class="form-control" id="category_id" name="category_id" onchange="getCategoryInfo()">
             <option value="">-нет-</option>
             @foreach ($categorys as $el)
                 <option value="{{$el->id}}" {{isset($data->category_id)&&$data->category_id==$el->id?'selected':''}}>{{$el->name}}</option>
@@ -48,6 +48,7 @@
         <div id="imageloader" data-list="{{isset($images_list)?$images_list:""}}" data-type="post"></div>
     </div>
 
+    <div id="fieldPhones">
     @include('admin._el',[
         'type'=>'text',
         'title'=>'Телефоны:',
@@ -55,7 +56,9 @@
         'value'=>isset($data->phones)?$data->phones:'',
         'placeholder'=>'Введите значение...',
     ])
+    </div>
 
+    <div id="fieldEmail">
     @include('admin._el',[
         'type'=>'text',
         'title'=>'Почта:',
@@ -63,7 +66,9 @@
         'value'=>isset($data->email)?$data->email:'',
         'placeholder'=>'Введите значение...',
     ])
+    </div>
 
+    <div id="fieldLink">
     @include('admin._el',[
         'type'=>'text',
         'title'=>'Ссылка:',
@@ -71,7 +76,9 @@
         'value'=>isset($data->link)?$data->link:'',
         'placeholder'=>'Введите значение...',
     ])
+    </div>
 
+    <div id="fieldPrice">
     @include('admin._el',[
         'type'=>'number',
         'title'=>'Цена:',
@@ -79,7 +86,9 @@
         'value'=>isset($data->price)?$data->price:'',
         'placeholder'=>'Введите значение...',
     ])
+    </div>
 
+    <div id="fieldLength">
     @include('admin._el',[
         'type'=>'number',
         'title'=>'Длительность (мин):',
@@ -87,7 +96,9 @@
         'value'=>isset($data->length)?$data->length:'',
         'placeholder'=>'Введите значение...',
     ])
+    </div>
 
+    <div id="fieldWorkTimes">
     <label><strong>Время работы:</strong> (с 00:00 до 00:00 - выходной, с 00:00 до 23:59 - круглосуточно)</label>
 
     @php
@@ -113,15 +124,18 @@
             <input placeholder="Время работы до..." class="form-control" type="time" name="to_d{{$i}}" value="{{isset($to_d[$i])?$to_d[$i]:''}}">
     </div>
     @endfor
-
-    <div class="form-group">
-        <label><strong>Дата начала события:</strong></label>
-        <input type="text" name="start_at" class="form-control datapicker" placeholder="Выберите дату начала..."  value="{{isset($data->start_at)?$data->start_at:''}}">
     </div>
 
-    <div class="form-group">
-        <label><strong>Дата окончания события:</strong></label>
-        <input type="text" name="end_at" class="form-control datapicker" placeholder="Выберите дату конца..."  value="{{isset($data->end_at)?$data->end_at:''}}">
+    <div id="fieldTimeBrackets">
+        <div class="form-group">
+            <label><strong>Дата начала события:</strong></label>
+            <input type="text" name="start_at" class="form-control datapicker" placeholder="Выберите дату начала..."  value="{{isset($data->start_at)?$data->start_at:''}}">
+        </div>
+
+        <div class="form-group">
+            <label><strong>Дата окончания события:</strong></label>
+            <input type="text" name="end_at" class="form-control datapicker" placeholder="Выберите дату конца..."  value="{{isset($data->end_at)?$data->end_at:''}}">
+        </div>
     </div>
 
     @include('admin._seo')
