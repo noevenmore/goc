@@ -72,6 +72,8 @@
         'checked'=>isset($data->is_show_email)?$data->is_show_email:true
     ])
 
+
+
     @include('admin._el',[
         'type'=>'check',
         'title'=>'Показывать время работы',
@@ -88,10 +90,17 @@
         'checked'=>isset($data->is_show_price)?$data->is_show_price:true
     ])
 
+    @include('admin._el',[
+        'type'=>'check',
+        'title'=>'Показывать дату начала-конца',
+        'name'=>'is_show_time_brackets',
+        'value'=>'1',
+        'checked'=>isset($data->is_show_time_brackets)?$data->is_show_time_brackets:true
+    ])
 
     @include('admin._el',[
         'type'=>'check',
-        'title'=>'Показывать длительность',
+        'title'=>'Показывать длительность проведения',
         'name'=>'is_show_length',
         'value'=>'1',
         'checked'=>isset($data->is_show_length)?$data->is_show_length:true

@@ -75,3 +75,8 @@ flatpickr("#datatimepicker", {
   enableTime: true,
   dateFormat: "Y-m-d H:i",
 });
+
+flatpickr(".datapicker", {
+  enableTime: false,
+  dateFormat: "Y-m-d",
+});

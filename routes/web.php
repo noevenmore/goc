@@ -17,6 +17,7 @@ function register($prefix,$class)
 Route::prefix('admin')->group(function () {
     Route::post('/loadimage',[App\Http\Controllers\PhotoController::class,'load_image'])->name('admin_loadimage');
     Route::post('/deleteimage',[App\Http\Controllers\PhotoController::class,'delete_image'])->name('admin_deleteimage');
+    Route::post('/category_info',[App\Http\Controllers\CategoryController::class,'info'])->name('admin_category_info');
 
     register('lang',App\Http\Controllers\LangController::class);
     register('category',App\Http\Controllers\CategoryController::class);

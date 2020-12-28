@@ -11,8 +11,24 @@
         'value'=>isset($data->id)?$data->id:'0'
     ])
 
+    @include('admin._el',[
+        'type'=>'check',
+        'title'=>'Показывать на сайте',
+        'name'=>'is_show',
+        'value'=>'1',
+        'checked'=>isset($data->is_show)?$data->is_show:true
+    ])
+
+    @include('admin._el',[
+        'type'=>'check',
+        'title'=>'Рекомендуемое',
+        'name'=>'is_recomend',
+        'value'=>'1',
+        'checked'=>isset($data->is_recomend)?$data->is_recomend:true
+    ])
+
     <div class="form-group">
-        <label><strong>Категория</strong></label>
+        <label><strong>Категория:</strong></label>
         <select class="form-control" name="category_id">
             <option value="">-нет-</option>
             @foreach ($categorys as $el)
@@ -34,7 +50,7 @@
 
     @include('admin._el',[
         'type'=>'text',
-        'title'=>'Телефоны',
+        'title'=>'Телефоны:',
         'name'=>'phones',
         'value'=>isset($data->phones)?$data->phones:'',
         'placeholder'=>'Введите значение...',
@@ -42,7 +58,7 @@
 
     @include('admin._el',[
         'type'=>'text',
-        'title'=>'Почта',
+        'title'=>'Почта:',
         'name'=>'email',
         'value'=>isset($data->email)?$data->email:'',
         'placeholder'=>'Введите значение...',
@@ -50,7 +66,7 @@
 
     @include('admin._el',[
         'type'=>'text',
-        'title'=>'Ссылка',
+        'title'=>'Ссылка:',
         'name'=>'link',
         'value'=>isset($data->link)?$data->link:'',
         'placeholder'=>'Введите значение...',
@@ -58,7 +74,7 @@
 
     @include('admin._el',[
         'type'=>'number',
-        'title'=>'Цена',
+        'title'=>'Цена:',
         'name'=>'price',
         'value'=>isset($data->price)?$data->price:'',
         'placeholder'=>'Введите значение...',
@@ -66,13 +82,13 @@
 
     @include('admin._el',[
         'type'=>'number',
-        'title'=>'Длительность (мин)',
+        'title'=>'Длительность (мин):',
         'name'=>'length',
         'value'=>isset($data->length)?$data->length:'',
         'placeholder'=>'Введите значение...',
     ])
 
-    <label><strong>Время работы:</strong> (если указано время работы с 0 до 0 то будет написано что выходной)</label>
+    <label><strong>Время работы:</strong> (с 00:00 до 00:00 - выходной, с 00:00 до 23:59 - круглосуточно)</label>
 
     @php
     $daylist = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];  
@@ -97,6 +113,18 @@
             <input placeholder="Время работы до..." class="form-control" type="time" name="to_d{{$i}}" value="{{isset($to_d[$i])?$to_d[$i]:''}}">
     </div>
     @endfor
+
+    <div class="form-group">
+        <label><strong>Дата начала события:</strong></label>
+        <input type="text" name="start_at" class="form-control datapicker" placeholder="Выберите дату начала..."  value="{{isset($data->start_at)?$data->start_at:''}}">
+    </div>
+
+    <div class="form-group">
+        <label><strong>Дата окончания события:</strong></label>
+        <input type="text" name="end_at" class="form-control datapicker" placeholder="Выберите дату конца..."  value="{{isset($data->end_at)?$data->end_at:''}}">
+    </div>
+
+    @include('admin._seo')
 
     <button class="btn btn-primary" type="submit">Ок</button>
 </form>

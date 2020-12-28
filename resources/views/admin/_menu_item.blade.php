@@ -59,19 +59,10 @@
         </select>
     </div>
 
-
-    <!--
-        menus - all menu
-        catogorys -
-        posts
-        langs - 
-        param - 
-    -->
-
     @if (count($langs)>0)
-    @include('admin._menu_item_data')
+        @include('admin._menu_item_data')
     @else
-    <div class="alert alert-danger text-center">Не добавлен ни 1 язык для заполнения названия</div>
+        <div class="alert alert-danger text-center">Не добавлен ни 1 язык для заполнения названия</div>
     @endif
 
     @include('admin._el',[

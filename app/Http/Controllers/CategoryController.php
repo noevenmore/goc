@@ -26,6 +26,7 @@ class CategoryController extends Controller
         $event->is_show_work_times = $this->get_param('is_show_work_times',false,$request);
         $event->is_show_price = $this->get_param('is_show_price',false,$request);
         $event->is_show_length = $this->get_param('is_show_length',false,$request);
+        $event->is_show_time_brackets = $this->get_param('is_show_time_brackets',false,$request);
 
         $event->save();
     }
@@ -87,5 +88,15 @@ class CategoryController extends Controller
         $data->delete();
 
         return json_encode(['success'=>true]);
+    }
+
+    public function info(Request $request)
+    {
+        $id = $request->input('id');
+        $data = Category::where('id',$id)->first();
+
+        if (!$data) return json_encode(['success'=>false,'message'=>'not found']);
+
+        return json_encode(['success'=>true,'data'=>(array)$data]);
     }
 }

@@ -36,6 +36,18 @@ class PostController extends Controller
         $event->email = $this->get_param('email','',$request);
         $event->link = $this->get_param('link','',$request);
 
+        $event->start_at = $this->get_param('start_at',null,$request);
+        $event->end_at = $this->get_param('end_at',null,$request);
+        $event->is_show = $this->get_param('is_show',false,$request);
+        $event->is_recomend = $this->get_param('is_recomend',false,$request);
+
+        //seo
+        $event->seo_meta_title = $this->get_param('seo_meta_title','',$request);
+        $event->seo_meta_description = $this->get_param('seo_meta_description','',$request);
+        $event->seo_keywords = $this->get_param('seo_keywords','',$request);
+        $event->seo_og_image = $this->get_param('seo_og_image','',$request);
+        $event->seo_meta_twitter_image = $this->get_param('seo_meta_twitter_image','',$request);
+
         $event->save();
 
         $langs = Lang::get();
