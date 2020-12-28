@@ -7,6 +7,7 @@
         'placeholder'=>'Введите значение...',
     ])
 
+    <div class="adress_field">
     @include('admin._el',[
         'type'=>'text',
         'title'=>'Адресс ('.$lg->name.'):',
@@ -14,6 +15,7 @@
         'value'=>isset($param['addr_'.$lg->litera])?$param['addr_'.$lg->litera]:'',
         'placeholder'=>'Введите значение...',
     ])
+    </div>
 
     @include('admin._el',[
         'type'=>'stext',

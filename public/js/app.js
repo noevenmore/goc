@@ -66339,17 +66339,18 @@ window.toggleMenu = function (id) {
 };
 
 window.doVisible = function (name, visible) {
-  if (visible) $('#' + name).show();else $('#' + name).hide();
+  if (visible) $(name).show();else $(name).hide();
 };
 
 window.ShowAllFields = function () {
-  doVisible('fieldEmail', true);
-  doVisible('fieldLength', true);
-  doVisible('fieldLink', true);
-  doVisible('fieldPhones', true);
-  doVisible('fieldPrice', true);
-  doVisible('fieldTimeBrackets', true);
-  doVisible('fieldWorkTimes', true);
+  doVisible('#fieldEmail', true);
+  doVisible('#fieldLength', true);
+  doVisible('#fieldLink', true);
+  doVisible('#fieldPhones', true);
+  doVisible('#fieldPrice', true);
+  doVisible('#fieldTimeBrackets', true);
+  doVisible('#fieldWorkTimes', true);
+  doVisible('.adress_field', true);
 };
 
 window.getCategoryInfo = function () {
@@ -66367,13 +66368,14 @@ window.getCategoryInfo = function () {
         var success = d.success;
 
         if (success) {
-          doVisible('fieldEmail', d.data.is_show_email);
-          doVisible('fieldLength', d.data.is_show_length);
-          doVisible('fieldLink', d.data.is_show_link);
-          doVisible('fieldPhones', d.data.is_show_phone);
-          doVisible('fieldPrice', d.data.is_show_price);
-          doVisible('fieldTimeBrackets', d.data.is_show_time_brackets);
-          doVisible('fieldWorkTimes', d.data.is_show_work_times);
+          doVisible('#fieldEmail', d.data.is_show_email);
+          doVisible('#fieldLength', d.data.is_show_length);
+          doVisible('#fieldLink', d.data.is_show_link);
+          doVisible('#fieldPhones', d.data.is_show_phone);
+          doVisible('#fieldPrice', d.data.is_show_price);
+          doVisible('#fieldTimeBrackets', d.data.is_show_time_brackets);
+          doVisible('#fieldWorkTimes', d.data.is_show_work_times);
+          doVisible('.adress_field', d.data.is_show_work_addr);
         } else {
           ShowAllFields();
         }
