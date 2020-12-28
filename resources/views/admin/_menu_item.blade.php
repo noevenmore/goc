@@ -60,7 +60,7 @@
     </div>
 
     @if (count($langs)>0)
-        @include('admin._menu_item_data')
+        @include('admin._data_name')
     @else
         <div class="alert alert-danger text-center">Не добавлен ни 1 язык для заполнения названия</div>
     @endif

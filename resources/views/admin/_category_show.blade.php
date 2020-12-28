@@ -24,7 +24,7 @@
     @foreach ($data as $d)
     <tr>
     <th scope="row">{{$d->id}}</th>
-    <td>{{$d->name}}</td>
+    <td>{{$d->info[0]->name}}</td>
     <td><a class="btn btn-sm btn-primary" href="{{route('admin_category_edit',$d->id)}}">Редактировать</a>
         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ModalDeleteWindow" data-id="{{$d->id}}" data-url="{{route('admin_category_delete_post')}}">Удалить</button>
     </tr>

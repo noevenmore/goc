@@ -37,11 +37,7 @@
         </select>
     </div>
 
-    @if (count($langs)>0)
-    @include('admin._post_data')
-    @else
-    <div class="alert alert-danger text-center">Не добавлен ни 1 язык для заполнения названия, адресса и текста</div>
-    @endif
+    @include('admin._data_all')
 
     <div class="form-group">
         <label><strong>Изображения:</strong></label>

@@ -11,14 +11,6 @@
         'value'=>isset($data->id)?$data->id:'0'
     ])
 
-    @include('admin._el',[
-        'type'=>'text',
-        'title'=>'Название',
-        'name'=>'name',
-        'value'=>isset($data->name)?$data->name:'',
-        'placeholder'=>'Введите значение...',
-    ])
-
     <div class="form-group">
         <label><strong>Родительская категория</strong></label>
         <select class="form-control" name="parent_id">
@@ -31,6 +23,12 @@
         </select>
     </div>
 
+    @include('admin._data_name')
+
+    <div class="form-group">
+        <label><strong>Изображения:</strong></label>
+        <div id="imageloader" data-list="{{isset($images_list)?$images_list:""}}" data-type="category"></div>
+    </div>
 
     @include('admin._el',[
         'type'=>'check',

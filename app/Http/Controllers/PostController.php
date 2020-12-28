@@ -95,7 +95,15 @@ class PostController extends Controller
         $categorys = Category::get();
         $langs = Lang::get();
 
-        return view('admin._post',compact('link','categorys','langs'));
+        $photos=Photo::where(['type'=>'post','data_id'=>0])->get();
+
+        $images_list = '';
+        foreach ($photos as $ph)
+        {
+            $images_list = $images_list . $ph->src . ';';
+        }
+
+        return view('admin._post',compact('link','categorys','langs','images_list'));
     }
 
     public function add_post(Request $request)

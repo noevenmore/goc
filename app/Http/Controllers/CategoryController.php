@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Lang;
+use App\Models\LangData;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,7 +20,7 @@ class CategoryController extends Controller
 
     public function save_event_from_request($event,Request $request)
     {
-        $event->name = $this->get_param('name','no_name',$request);
+        $event->slug = '';
         $event->parent_id = $this->get_param('parent_id',0,$request);
         $event->is_show_addr = $this->get_param('is_show_addr',false,$request);
         $event->is_show_phone = $this->get_param('is_show_phone',false,$request);
@@ -29,6 +32,36 @@ class CategoryController extends Controller
         $event->is_show_time_brackets = $this->get_param('is_show_time_brackets',false,$request);
 
         $event->save();
+
+        $langs = Lang::get();
+
+        foreach ($langs as $lg)
+        {
+            $d = LangData::where(['type'=>'category','data_id'=>$event->id,'lang_id'=>$lg->id])->first();
+            if (!$d)
+            {
+                $d = new LangData;
+                $d->type='category';
+                $d->data_id = $event->id;
+                $d->lang_id = $lg->id;
+            }
+
+            $d->name = $this->get_param('name_'.$lg->litera,'',$request);
+            $d->addr = $this->get_param('addr_'.$lg->litera,'',$request);
+            $d->text = $this->get_param('text_'.$lg->litera,'',$request);
+
+            $d->save();
+        }
+
+        $dd = LangData::where(['type'=>'category','data_id'=>$event->id])->first();
+
+        if ($dd)
+        $event->slug = str_slug($dd->name);
+        else $event->slug = '';
+
+        $event->save();
+
+        PhotoController::publish_images($event->id,'category');
     }
 
     public function show(Request $request)
@@ -42,8 +75,17 @@ class CategoryController extends Controller
     {
         $link=route('admin_category_add_post');
         $categorys = Category::get();
+        $langs = Lang::get();
 
-        return view('admin._category',compact('link','categorys'));
+        $photos=Photo::where(['type'=>'category','data_id'=>0])->get();
+
+        $images_list = '';
+        foreach ($photos as $ph)
+        {
+            $images_list = $images_list . $ph->src . ';';
+        }
+
+        return view('admin._category',compact('link','langs','categorys','images_list'));
     }
 
     public function add_post(Request $request)
@@ -64,7 +106,26 @@ class CategoryController extends Controller
 
         $link=route('admin_category_edit_post');
 
-        return view('admin._category',compact('data','link','categorys'));
+        $langs = Lang::get();
+        $ld = LangData::with('lang')->where(['type'=>'post','data_id'=>$id])->get();
+        $param = [];
+
+        foreach ($ld as $p)
+        {
+            $param['name_'.$p->lang->litera]=$p->name;
+            $param['addr_'.$p->lang->litera]=$p->addr;
+            $param['text_'.$p->lang->litera]=$p->text;
+        }
+
+        $photos=Photo::where(['type'=>'category','data_id'=>$id])->get();
+
+        $images_list = '';
+        foreach ($photos as $ph)
+        {
+            $images_list = $images_list . $ph->src . ';';
+        }
+
+        return view('admin._category',compact('data','link','categorys','images_list','langs','param'));
     }
 
     public function edit_post(Request $request)
@@ -85,6 +146,8 @@ class CategoryController extends Controller
 
         if (!$data) return json_encode(['success'=>false,'message'=>'not found']);
         
+        PhotoController::delete_images_with_type_and_id('category',$id);
+
         $data->delete();
 
         return json_encode(['success'=>true]);
