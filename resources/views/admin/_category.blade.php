@@ -31,6 +31,15 @@
         </select>
     </div>
 
+
+    @include('admin._el',[
+        'type'=>'check',
+        'title'=>'Показывать на главной странице',
+        'name'=>'is_show_main',
+        'value'=>'1',
+        'checked'=>isset($data->is_show_main)?$data->is_show_main:true
+    ])
+
     @include('admin._el',[
         'type'=>'check',
         'title'=>'Показывать адресс',

@@ -14,8 +14,14 @@
     <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_category_add')}}">Добавить категорию</a></p>
 </div>
 
-<div onclick="toggleMenu(5)" class="btn btn-sm btn-success w-100 mt-2">Места</div>
+<div onclick="toggleMenu(5)" class="btn btn-sm btn-success w-100 mt-2">Юниты</div>
 <div id="menu_items_5" class="w-100" style="display: none;">
-    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_post_show')}}">Просмотр места</a></p>
-    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_post_add')}}">Добавить место</a></p>
+    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_post_show')}}">Просмотр юнитов</a></p>
+    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_post_add')}}">Добавить юнит</a></p>
+</div>
+
+<div onclick="toggleMenu(6)" class="btn btn-sm btn-success w-100 mt-2">Меню</div>
+<div id="menu_items_6" class="w-100" style="display: none;">
+    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_menu_item_show')}}">Просмотр меню</a></p>
+    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_menu_item_add')}}">Добавить меню</a></p>
 </div>

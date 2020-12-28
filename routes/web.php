@@ -21,6 +21,7 @@ Route::prefix('admin')->group(function () {
     register('lang',App\Http\Controllers\LangController::class);
     register('category',App\Http\Controllers\CategoryController::class);
     register('post',App\Http\Controllers\PostController::class);
+    register('menu_item',App\Http\Controllers\MenuItemController::class);
 });
 
 

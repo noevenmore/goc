@@ -1,5 +1,5 @@
 @extends('admin.app')
-@section('title','Работа с местами')
+@section('title','Работа с юнитом')
 
 @section('content')
 
@@ -57,7 +57,7 @@
     ])
 
     @include('admin._el',[
-        'type'=>'text',
+        'type'=>'number',
         'title'=>'Цена',
         'name'=>'price',
         'value'=>isset($data->price)?$data->price:'',
@@ -65,8 +65,8 @@
     ])
 
     @include('admin._el',[
-        'type'=>'text',
-        'title'=>'Длительность',
+        'type'=>'number',
+        'title'=>'Длительность (мин)',
         'name'=>'length',
         'value'=>isset($data->length)?$data->length:'',
         'placeholder'=>'Введите значение...',
