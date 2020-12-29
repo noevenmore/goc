@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-2 col-md-12">
-                <a class="logo" href="/"><img src="img/logoF.png" alt=""></a>
+                <a class="logo" href="/"><img src="/img/logoF.png" alt=""></a>
             </div>
 
             @php
@@ -48,8 +48,8 @@
     <div class="container line">
         <span>© 2020 Офіційний туристичний сайт міста Чернівці</span>
         <div class="social">
-            <a href="#"><img src="img/fb.png" alt=""></a>
-            <a href="#"><img src="img/insta.png" alt=""></a>
+            <a href="#"><img src="/img/fb.png" alt=""></a>
+            <a href="#"><img src="/img/insta.png" alt=""></a>
         </div>
     </div>
 </div>

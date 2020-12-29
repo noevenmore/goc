@@ -13,4 +13,14 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\LangData','data_id','id')->where('type','category');
     }
+
+    public function parent()
+    {
+        return $this->hasMany('App\Models\LangData','id','parent_id')->where('type','category');
+    }
+
+    public function childrens()
+    {
+        return $this->hasMany('App\Models\Category','parent_id','id');
+    }
 }

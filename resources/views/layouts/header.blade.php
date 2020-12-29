@@ -24,21 +24,19 @@
     </ul>
 </nav>
 
-
-
 <header class="header"
-@isset($images)
-style="background-image: url(../upload/images/{{$images[0]->src}});"
+@if(isset($images) && count($images)>0)
+style="background-image: url(/upload/images/{{$images[0]->src}});"
 @else
-style="background-image: url(../img/slider.jpg);"
-@endisset
+style="background-image: url(/img/slider.jpg);"
+@endif
 >
     <div class="header_wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-xl-2 col-lg-2 col-md-8 col-5">
                     <div class="header_logo">
-                        <a href="#"><img src="img/logo.png" alt=""></a>
+                        <a href="/"><img src="/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-8 d-lg-flex d-none">
@@ -59,11 +57,12 @@ style="background-image: url(../img/slider.jpg);"
                                 @php
                                 $lang_name = _lg($system_var_langs,'name');
                                 @endphp
-                                <a href="#">{{$lang_name}}<img src="img/arrowW.png" alt=""></a>
+
+                                <a href="#">{{$lang_name}}<img src="/img/arrowW.png" alt=""></a>
                                 <div class="lang_toggle">
                                     @foreach ($system_var_langs as $lg)
                                         @if ($lg->name!=$lang_name)
-                                        <a href="/lang/{{$lg->litera}}">{{$lg->name}}</a>
+                                        <a href="{{route('language',$lg->litera)}}">{{$lg->name}}</a>
                                         @endif
                                     @endforeach
                                 </div>
@@ -71,12 +70,12 @@ style="background-image: url(../img/slider.jpg);"
                         </div>
                         <div class="header_bar-item">
                             <a class="header_bar-like">
-                                <img src="img/heart.png" alt="">
+                                <img src="/img/heart.png" alt="">
                             </a>
                         </div>
                         <div class="header_bar-item">
                             <a class="header_bar-search">
-                                <img src="img/search.png" alt="">
+                                <img src="/img/search.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -84,8 +83,6 @@ style="background-image: url(../img/slider.jpg);"
             </div>
         </div>
     </div>
-
-
 
     <div class="wrap_mnu">
         <div class="toggle_mnu">
@@ -95,74 +92,19 @@ style="background-image: url(../img/slider.jpg);"
         </div>
     </div>
 
-
-
-
-
     <div class="container">
-
-
-        <div class="header_slider">
-            <div class="owl-carousel slider">
-                <div class="item">
-                    <div class="h1">
-                        чернівці - це про подорож з друзями 
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="h1">
-                        &nbsp;&nbsp;чернівці - це про подорож з друзями 1
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="h1">
-                        &nbsp;&nbsp;чернівці - це про подорож з друзями 2
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="h1">
-                        &nbsp;&nbsp;чернівці - це про подорож з друзями 3
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="h1">
-                        &nbsp;&nbsp;чернівці - це про подорож з друзями 4
-                    </div>
-                </div>
-            </div>
-        </div>
+        @isset($is_main_page)
+            @include('layouts._header_main_carousel')
+        @else
+            @include('layouts._header_title',['post'=>isset($post)?$post:null,'category'=>isset($category)?$category:null])
+        @endisset
     </div>
-
-
-<!--
-    <div class="container">
-        <div id="breadcrumbs" class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb">
-                        <a href="#" class="main">Головна /</a><a href="#" class="main"> Події  /</a><a href="#" class="haschild">Чернівецький музей Володимира Івасюка</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header_slider">
-            <div class="banner">
-                <div class="item">
-                    <div class="h1">
-                        ЧЕРНІВЕЦЬКИЙ МУЗЕЙ ВОЛОДИМИРА ІВАСЮКА
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
 
     <div class="header_submenu">
         @foreach ($menu_items as $mi)
             @if ($mi->childrens)
             <div class="submenu_wrapp menu_super_item_{{$mi->id}}">
                 <ul>
-
                     @foreach ($mi->childrens as $ch)
                         <li>
                             <a href="
@@ -170,7 +112,6 @@ style="background-image: url(../img/slider.jpg);"
                             ">{{_lg($ch->info,'name')}}</a>
                         </li>
                     @endforeach
-
                 </ul>
 
                 <ul>
@@ -186,70 +127,7 @@ style="background-image: url(../img/slider.jpg);"
 
 
 
-
-
-
-<!--
-<div class="header_advantages">			
-    <div class="container">
-        <div class="row">
-            <div class="advantages">
-                <div class="advantages_item">
-                    <div class="advantages_img">
-                        <img src="img/calendar.png" alt="">
-                    </div>
-                    <div class="advantages_desc">
-                        <div class="advantages_title">
-                            Дата проведення
-                        </div>
-                        <div class="advantages_subtitle">
-                            26 грудня
-                        </div>
-                    </div>
-                </div>
-                <div class="advantages_item">
-                    <div class="advantages_img">
-                        <img src="img/pin.png" alt="">
-                    </div>
-                    <div class="advantages_desc">
-                        <div class="advantages_title">
-                            Адреса
-                        </div>
-                        <div class="advantages_subtitle">
-                            {{_lg($ch->info,'addr')}}
-                        </div>
-                    </div>
-                </div>
-                <div class="advantages_item">
-                    <div class="advantages_img">
-                        <img src="img/clock.png" alt="">
-                    </div>
-                    <div class="advantages_desc">
-                        <div class="advantages_title">
-                            Часи відвідування
-                        </div>
-                        <div class="advantages_subtitle">
-                            {{_lg($ch->info,'work_times')}}
-                        </div>
-                    </div>
-                </div>
-                <div class="advantages_item advantages_item--social">
-                    <a href="#">Посилання на booking.com</a>
-                    <a href="#" class="advantages_img">
-                        <img src="img/insta1.png" alt="">
-                    </a>
-                    <a href="#" class="advantages_img">
-                        <img src="img/fb1.png" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>	
-</div>
--->
-
-
-
-
-
+    @if(isset($post->category) && !isset($category))
+        @include('layouts._header_info')
+    @endif
 </header>

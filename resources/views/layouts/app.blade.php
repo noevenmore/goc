@@ -8,8 +8,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-	<link rel="icon" href="img/favicon.png">
-	<link rel="stylesheet" href="css/styles.min.css">
+	<link rel="icon" href="/img/favicon.png">
+	<link rel="stylesheet" href="/css/styles.min.css">
 </head>
 <body>
     <div id="app">
@@ -18,7 +18,7 @@
         </main>
     </div>
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="/js/scripts.min.js"></script>
+    <script src="/js/scripts.js"></script>
 </body>
 </html>

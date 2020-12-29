@@ -113,7 +113,7 @@ class CategoryController extends Controller
         $link=route('admin_category_edit_post');
 
         $langs = Lang::get();
-        $ld = LangData::with('lang')->where(['type'=>'post','data_id'=>$id])->get();
+        $ld = LangData::with('lang')->where(['type'=>'category','data_id'=>$id])->get();
         $param = [];
 
         foreach ($ld as $p)

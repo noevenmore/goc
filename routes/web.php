@@ -27,10 +27,13 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/',[\App\Http\Controllers\SiteController::class,'index'])->name('index');
 Route::get('/show/{id}/{slug?}',[\App\Http\Controllers\SiteController::class,'post_show'])->name('post');
+Route::get('/category/{id}/{slug?}',[\App\Http\Controllers\SiteController::class,'category_show'])->name('category');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->name('home');
+
+Route::get('/lang/{id}',[\App\Http\Controllers\SiteController::class,'set_language'])->name('language');
 
 /*
 Route::get('/', function () {

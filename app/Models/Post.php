@@ -18,4 +18,9 @@ class Post extends Model
     {
         return $this->hasOne('App\Models\Category','id','category_id');
     }
+
+    public function photo()
+    {
+        return $this->hasMany('App\Models\Photo','data_id','id')->where('type','post');
+    }
 }
