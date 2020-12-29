@@ -32,7 +32,7 @@
         <select class="form-control" id="category_id" name="category_id" onchange="getCategoryInfo()">
             <option value="">-нет-</option>
             @foreach ($categorys as $el)
-                <option value="{{$el->id}}" {{isset($data->category_id)&&$data->category_id==$el->id?'selected':''}}>{{$el->name}}</option>
+                <option value="{{$el->id}}" {{isset($data->category_id)&&$data->category_id==$el->id?'selected':''}}>{{$el->info[0]->name}}</option>
             @endforeach
         </select>
     </div>

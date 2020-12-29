@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('owl.carousel/dist/owl.carousel');
 
 /**
  * Next, we will create a fresh React component instance and attach it to

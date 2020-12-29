@@ -13,4 +13,9 @@ class MenuItem extends Model
     {
         return $this->hasMany('App\Models\LangData','data_id','id')->where('type','menu');
     }
+
+    public function childrens()
+    {
+        return $this->hasMany('App\Models\MenuItem','parent_id','id')->orderBy('position', 'desc');
+    }
 }

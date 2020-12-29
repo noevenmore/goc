@@ -17,7 +17,7 @@
             <option value="">-нет-</option>
             @foreach ($categorys as $el)
                 @if (!isset($data->id) || $data->id!=$el->id)
-                    <option value="{{$el->id}}" {{isset($data->parent_id)&&$data->parent_id==$el->id?'selected':''}}>{{$el->name}}</option>
+                    <option value="{{$el->id}}" {{isset($data->parent_id)&&$data->parent_id==$el->id?'selected':''}}>{{$el->info[0]->name}}</option>
                 @endif
             @endforeach
         </select>

@@ -43,7 +43,7 @@
         <select class="form-control" name="category_id">
             <option value="0">-нет-</option>
             @foreach ($categorys as $el)
-                <option value="{{$el->id}}" {{isset($data->category_id)&&$data->category_id==$el->id?'selected':''}}>{{$el->name}}</option>
+                <option value="{{$el->id}}" {{isset($data->category_id)&&$data->category_id==$el->id?'selected':''}}>{{$el->info[0]->name}}</option>
             @endforeach
         </select>
     </div>

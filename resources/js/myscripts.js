@@ -104,7 +104,7 @@ window.getCategoryInfo = function()
                 doVisible('#fieldPrice',d.data.is_show_price);
                 doVisible('#fieldTimeBrackets',d.data.is_show_time_brackets);
                 doVisible('#fieldWorkTimes',d.data.is_show_work_times);
-                doVisible('.adress_field',d.data.is_show_work_addr);
+                doVisible('.adress_field',d.data.is_show_addr);
             } else
             {
                 ShowAllFields();

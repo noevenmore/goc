@@ -113,3 +113,11 @@ window.makeFavorite = function (_type,_photo_id,_data_id)
 
     return false;
 }
+
+
+$(".menu_super_item").hover(function(){
+    var id = $(this).data('id');
+
+    $(".header_submenu").css("display","block");
+    $(".menu_super_item_"+id).css("display","block");
+});

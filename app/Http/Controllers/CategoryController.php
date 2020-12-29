@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        // Only admin access
+        $this->middleware('auth');
+    }
+
     public function get_param($param,$default,Request $request)
     {
         $d = $request->input($param,$default);

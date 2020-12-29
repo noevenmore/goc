@@ -25,15 +25,19 @@ Route::prefix('admin')->group(function () {
     register('menu_item',App\Http\Controllers\MenuItemController::class);
 });
 
-
 Route::get('/',[\App\Http\Controllers\SiteController::class,'index'])->name('index');
+Route::get('/show/{id}/{slug?}',[\App\Http\Controllers\SiteController::class,'post_show'])->name('post');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->name('home');
 
 /*
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/test',[App\Http\Controllers\LangController::class, 'test'])->name('test');
