@@ -54,14 +54,18 @@ style="background-image: url(/img/slider.jpg);"
                     <div class="header_bar">
                         <div class="header_bar-item">
                             <div class="header_bar-lang">
-                                @php
-                                $lang_name = _lg($system_var_langs,'name');
-                                @endphp
+                                <a href="#">
+                                    @foreach ($system_var_langs as $lg)
+                                        @if ($lg->id == $system_var_lang_id)    
+                                        {{$lg->name}}
+                                        @endif
+                                    @endforeach
+                                    <img src="/img/arrowW.png" alt="">
+                                </a>
 
-                                <a href="#">{{$lang_name}}<img src="/img/arrowW.png" alt=""></a>
                                 <div class="lang_toggle">
                                     @foreach ($system_var_langs as $lg)
-                                        @if ($lg->name!=$lang_name)
+                                        @if ($lg->id != $system_var_lang_id)
                                         <a href="{{route('language',$lg->litera)}}">{{$lg->name}}</a>
                                         @endif
                                     @endforeach

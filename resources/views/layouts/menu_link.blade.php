@@ -1,11 +1,16 @@
 @php
-    switch ($item->type) {
+    $t = 'none';
+
+    if (isset($type)) $t=$type;
+    if (isset($item->type)) $t=$item->type;
+
+    switch ($t) {
         case 'gallery':
         echo '/gallery';
         break;
         
         case 'category':
-        echo '/category/'.$item->category_id;
+        echo route('category',['id'=>$item->category_id,'slug'=>$item->slug]);
         break;
 
         case 'search':
@@ -13,7 +18,7 @@
         break;
 
         case 'post':
-        echo '/post'.$item->post_id;
+        echo route('post',['id'=>$item->post_id,'slug'=>$item->slug]);
         break;
 
         default:

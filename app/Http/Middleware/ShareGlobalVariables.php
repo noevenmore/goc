@@ -29,6 +29,11 @@ class ShareGlobalVariables
 
         $lang_id = Lang::where('litera',$locale)->first();
 
+        if (!$lang_id)
+        {
+            $lang_id=Lang::first();
+        }
+
         if ($lang_id) view()->share('system_var_lang_id',$lang_id->id);
         else view()->share('system_var_lang_id',0);
 

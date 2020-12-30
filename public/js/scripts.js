@@ -119,5 +119,6 @@ $(".menu_super_item").hover(function(){
     var id = $(this).data('id');
 
     $(".header_submenu").css("display","block");
+    $(".submenu_wrapp").css("display","none");
     $(".menu_super_item_"+id).css("display","block");
 });
