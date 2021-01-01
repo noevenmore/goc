@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Lang;
+use App\Models\LangData;
+use App\Models\MainPageSlider;
 use App\Models\Photo;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -68,7 +70,51 @@ class SiteController extends Controller
 
     public function index(Request $request)
     {
-        return view('index');
+        $mp_sliders = MainPageSlider::with('info','photo')->get();
+
+        return view('index',compact('mp_sliders'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('t');
+
+        $locale = \App::getlocale();
+        $lang_id = Lang::where('litera',$locale)->first();
+
+        if (!$lang_id)
+        {
+            $lang_id=Lang::first();
+        }
+
+        $post=LangData::with(['post','post.category','post.photo'])
+        ->where(['type'=>'post','lang_id'=>$lang_id->id])
+        ->where(function ($query) use ($search)
+        {
+            $query->orWhere('name','like','%'.$search.'%')
+            ->orWhere('addr','like','%'.$search.'%')
+            ->orWhere('text','like','%'.$search.'%');
+        });
+
+        
+
+        /*
+        if ($filter) $post = $post->orderBy('created_at','asc');
+        else $post = $post->orderBy('created_at','desc');
+*/
+
+        $post = $post->paginate(12);
+        $post=$post->appends(['t'=>$search]);
+        //$post = $post->groupBy('data_id');
+
+        //return dd($post);
+
+        return view('search',compact('post','search'));
+    }
+
+    public function map(Request $request)
+    {
+        return view('map');
     }
 
     public function set_language(Request $request,$id)

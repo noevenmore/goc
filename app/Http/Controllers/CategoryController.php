@@ -28,6 +28,7 @@ class CategoryController extends Controller
     {
         $event->slug = '';
         $event->parent_id = $this->get_param('parent_id',0,$request);
+        $event->is_show_main = $this->get_param('is_show_main',false,$request); 
         $event->is_show_addr = $this->get_param('is_show_addr',false,$request);
         $event->is_show_phone = $this->get_param('is_show_phone',false,$request);
         $event->is_show_link = $this->get_param('is_show_link',false,$request);
@@ -153,6 +154,9 @@ class CategoryController extends Controller
         if (!$data) return json_encode(['success'=>false,'message'=>'not found']);
         
         PhotoController::delete_images_with_type_and_id('category',$id);
+
+        $ld = LangData::where(['type'=>'category','data_id'=>$id])->get();
+        foreach ($ld as $l) $l->delete();
 
         $data->delete();
 

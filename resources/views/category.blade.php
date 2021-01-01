@@ -10,7 +10,21 @@
                 <div class="col-md-9 col-12">
                     <div class="navigation">
                         <ul>
+                            @php
+                                $count = 0;
+                            @endphp
                             @foreach ($subcategorys as $sc)
+
+                            @php
+                            $count++;
+
+                            if ($count>4)
+                            {
+                                echo '</ul><ul>';
+                                $count=0;
+                            }
+                            @endphp
+
                             <li><a class="navigation_link" href="{{route('category',['id'=>$sc->id,'slug'=>$sc->slug])}}">{{_lg($sc->info,'name')}}</a></li>
                             @endforeach
                         </ul>
@@ -36,7 +50,7 @@
 
                 @foreach ($post as $pi)
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="card">
+                        <div class="card" style="min-height:1px;">
                             <div class="card_img">
                                 <a href="{{route('post',['id'=>$pi->id,'slug'=>$pi->slug])}}">
                                     @if (isset($pi->photo) && count($pi->photo)>0)
@@ -55,7 +69,7 @@
                                     {!!mb_strimwidth(_lg($pi->info,'text'),0,50,'...')!!}
                                 </div>
                             -->
-                                <div class="card_date">
+                                <div class="card_date" style="position: initial;">
                                     {{_lg($pi->category->info,'name')}}
                                 </div>
                             </div>

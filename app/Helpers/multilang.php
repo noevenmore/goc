@@ -22,6 +22,9 @@ if (!function_exists('_lg'))
                 $find=true;
             }
         }
-        if (!$find) return $data[0]->{$var};
+        if (!$find)
+        {
+            if (isset($data[0]->{$var})) return $data[0]->{$var}; else return '???';
+        }
     }
 } 

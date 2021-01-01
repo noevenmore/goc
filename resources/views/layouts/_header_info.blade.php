@@ -10,19 +10,19 @@
                         </div>
                         <div class="advantages_desc">
                             <div class="advantages_title">
-                                Дата проведення
+                                {{__('Date of the event')}}
                             </div>
                             <div class="advantages_subtitle">
                                 @if ($post->start_at && $post->end_at)
                                     {{date('d-m-Y',strtotime($post->start_at))}} - {{date('d-m-Y',strtotime($post->end_at))}}
                                 @else
                                     @if ($post->start_at)
-                                        С {{date('d-m-Y',strtotime($post->start_at))}}
+                                    {{__('From')}} {{date('d-m-Y',strtotime($post->start_at))}}
                                     @else
                                         @if ($post->end_at)
-                                            До {{date('d-m-Y',strtotime($post->end_at))}}
+                                        {{__('To')}} {{date('d-m-Y',strtotime($post->end_at))}}
                                         @else
-                                        Не відомо
+                                        {{__('Unknown')}}
                                         @endif
                                     @endif
                                 @endif
@@ -39,7 +39,7 @@
                         </div>
                         <div class="advantages_desc">
                             <div class="advantages_title">
-                                Робочі часи
+                                {{__('Working time')}}
                             </div>
                             <div class="advantages_subtitle">
                                 @foreach ($work_times as $wt)
@@ -57,7 +57,7 @@
                         </div>
                         <div class="advantages_desc">
                             <div class="advantages_title">
-                                Адреса
+                                {{__('Address')}}
                             </div>
                             <div class="advantages_subtitle">
                                 {{_lg($post->info,'addr')}}
@@ -74,7 +74,7 @@
                     </div>
                     <div class="advantages_desc">
                         <div class="advantages_title">
-                            Цена
+                            {{__('Price')}}
                         </div>
                         <div class="advantages_subtitle">
                             {{$post->price}}
@@ -91,7 +91,7 @@
                     </div>
                     <div class="advantages_desc">
                         <div class="advantages_title">
-                            Длительность
+                            {{__('Duration')}}
                         </div>
                         <div class="advantages_subtitle">
                             {{$post->length}}
@@ -108,7 +108,7 @@
                         </div>
                         <div class="advantages_desc">
                             <div class="advantages_title">
-                                Телефони
+                                {{__('Phones')}}
                             </div>
                             <div class="advantages_subtitle">
                                 @php
@@ -125,7 +125,7 @@
 
                 <div class="advantages_item advantages_item--social">
                     @if ($post->category->is_show_link)
-                        <a href="{{$post->link}}">Посилання на сайт</a>
+                        <a href="{{$post->link}}">{{__('Link on site')}}</a>
                     @endif
 
                     <a href="#" class="advantages_img">

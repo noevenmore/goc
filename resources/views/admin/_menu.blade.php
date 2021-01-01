@@ -25,3 +25,9 @@
     <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_menu_item_show')}}">Просмотр меню</a></p>
     <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_menu_item_add')}}">Добавить меню</a></p>
 </div>
+
+<div onclick="toggleMenu(100)" class="btn btn-sm btn-success w-100 mt-2">Система</div>
+<div id="menu_items_100" class="w-100" style="display: none;">
+    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_mp_slider_show')}}">Просмотр слайдеров на главной</a></p>
+    <p class="my-1"><a class="btn btn-sm btn-primary w-100" href="{{route('admin_mp_slider_add')}}">Добавить слайдер на главной</a></p>
+</div>

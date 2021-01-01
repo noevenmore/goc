@@ -16,7 +16,7 @@ class Category extends Model
 
     public function parent()
     {
-        return $this->hasMany('App\Models\LangData','id','parent_id')->where('type','category');
+        return $this->hasOne('App\Models\Category','id','parent_id');
     }
 
     public function childrens()

@@ -13,4 +13,9 @@ class LangData extends Model
     {
         return $this->hasOne('App\Models\Lang','id','lang_id');
     }
+
+    public function post()
+    {
+        return $this->hasOne('App\Models\Post','id','data_id');
+    }
 }

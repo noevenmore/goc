@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 function register($prefix,$class)
 {
-    Route::get('/',[\App\Http\Controllers\AdminController::class,'index'])->name('admin_index');
-
     Route::get('/'.$prefix, [$class, 'show'])->name('admin_'.$prefix.'_show');
     Route::get('/'.$prefix.'/edit/{id}', [$class, 'edit'])->name('admin_'.$prefix.'_edit');
     Route::post('/'.$prefix.'/edit', [$class, 'edit_post'])->name('admin_'.$prefix.'_edit_post');
@@ -15,6 +13,7 @@ function register($prefix,$class)
 }
 
 Route::prefix('admin')->group(function () {
+    Route::get('/',[\App\Http\Controllers\AdminController::class,'index'])->name('admin_index');
     Route::post('/loadimage',[App\Http\Controllers\PhotoController::class,'load_image'])->name('admin_loadimage');
     Route::post('/deleteimage',[App\Http\Controllers\PhotoController::class,'delete_image'])->name('admin_deleteimage');
     Route::post('/category_info',[App\Http\Controllers\CategoryController::class,'info'])->name('admin_category_info');
@@ -23,25 +22,15 @@ Route::prefix('admin')->group(function () {
     register('category',App\Http\Controllers\CategoryController::class);
     register('post',App\Http\Controllers\PostController::class);
     register('menu_item',App\Http\Controllers\MenuItemController::class);
+    register('mp_slider',App\Http\Controllers\MainPageSliderController::class);
 });
 
 Route::get('/',[\App\Http\Controllers\SiteController::class,'index'])->name('index');
+Route::get('/lang/{id}',[\App\Http\Controllers\SiteController::class,'set_language'])->name('language');
 Route::get('/show/{id}/{slug?}',[\App\Http\Controllers\SiteController::class,'post_show'])->name('post');
 Route::get('/category/{id}/{slug?}',[\App\Http\Controllers\SiteController::class,'category_show'])->name('category');
+Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->name('home');
+Route::get('/map',[\App\Http\Controllers\SiteController::class,'map'])->name('map');
+Route::get('/search',[\App\Http\Controllers\SiteController::class,'search'])->name('search');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\AdminController::class, 'index'])->name('home');
-
-Route::get('/lang/{id}',[\App\Http\Controllers\SiteController::class,'set_language'])->name('language');
-
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/test',[App\Http\Controllers\LangController::class, 'test'])->name('test');
-*/

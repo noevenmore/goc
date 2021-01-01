@@ -7,7 +7,7 @@
                 " class="header_menu-link">{{_lg($mi->info,'name')}}</a>
             </li>
 
-            @if ($mi->childrens)
+            @if ($mi->childrens && count($mi->childrens)>0)
                 <div class="submenu_wrapp">
                     <ul>
                         @foreach ($mi->childrens as $ch)
@@ -24,11 +24,18 @@
     </ul>
 </nav>
 
-<header class="header"
-@if(isset($images) && count($images)>0)
-style="background-image: url(/upload/images/{{$images[0]->src}});"
+<header
+@if (isset($simple_header))
+class="header header_map" 
+style="background-image: none; background-color: rgb(44, 26, 26);">
 @else
-style="background-image: url(/img/slider.jpg);"
+class="header"
+
+    @if(isset($images) && count($images)>0)
+        style="background-image: url(/upload/images/{{$images[0]->src}});transition: background 0.2s ease;"
+    @else
+        style="background-image: url(/img/slider.jpg);transition: background 0.2s ease;"
+    @endif
 @endif
 >
     <div class="header_wrapper">
@@ -96,6 +103,7 @@ style="background-image: url(/img/slider.jpg);"
         </div>
     </div>
 
+    @if (!isset($simple_header))
     <div class="container">
         @isset($is_main_page)
             @include('layouts._header_main_carousel')
@@ -103,11 +111,12 @@ style="background-image: url(/img/slider.jpg);"
             @include('layouts._header_title',['post'=>isset($post)?$post:null,'category'=>isset($category)?$category:null])
         @endisset
     </div>
+    @endif
 
     <div class="header_submenu">
         @foreach ($menu_items as $mi)
-            @if ($mi->childrens)
-            <div class="submenu_wrapp menu_super_item_{{$mi->id}}">
+            @if ($mi->childrens && count($mi->childrens)>0)
+            <div class="submenu_wrapp submenu_wrapp2 menu_super_item_{{$mi->id}}">
                 <ul>
                     @foreach ($mi->childrens as $ch)
                         <li>
@@ -127,9 +136,10 @@ style="background-image: url(/img/slider.jpg);"
             @endif
         @endforeach
     </div>
-    <input class="search_site" type="text" placeholder="Пошук на сайті">
 
-
+    <form action="{{route('search')}}" method="GET">
+    <input class="search_site" name="t" type="text" placeholder="{{__('Search on the site')}}">
+</form>
 
     @if(isset($post->category) && !isset($category))
         @include('layouts._header_info')

@@ -119,6 +119,28 @@ $(".menu_super_item").hover(function(){
     var id = $(this).data('id');
 
     $(".header_submenu").css("display","block");
-    $(".submenu_wrapp").css("display","none");
+    $(".submenu_wrapp2").css("display","none");
     $(".menu_super_item_"+id).css("display","block");
 });
+
+$(".header_menu-item").click(function()
+{
+    var el = $(this).next(".submenu_wrapp");
+    if (el.length)
+    {
+        el.toggle();
+    } else
+    {
+        var ch = $(this).children('a');
+        window.location.href=ch.attr('href');
+    }
+});
+
+$(".main-slider").on('changed.owl.carousel',function(event){
+    var src=$('.slide_img_id'+event.page.index).attr('src');
+    if (src)
+    {
+        $('.header').css('background-image', 'url(' + src + ')');
+    }
+    
+})
