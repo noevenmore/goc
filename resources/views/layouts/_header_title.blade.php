@@ -36,6 +36,10 @@
                 @else
                     @if (isset($category->info) && $category->info)
                         {{_lg($category->info,'name')}}
+                    @else
+                        @if (isset($ex_page_text))
+                        {{$ex_page_text}}
+                        @endif
                     @endif
                 @endif
             </div>

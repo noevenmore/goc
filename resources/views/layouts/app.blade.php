@@ -9,7 +9,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 	<link rel="icon" href="/img/favicon.png">
-	<link rel="stylesheet" href="/css/styles.min.css">
+    <link rel="stylesheet" href="/css/styles.min.css">
+    <link rel="stylesheet" href="/css/editor.css">
 </head>
 <body>
     <div id="app">

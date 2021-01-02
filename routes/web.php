@@ -17,6 +17,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/loadimage',[App\Http\Controllers\PhotoController::class,'load_image'])->name('admin_loadimage');
     Route::post('/deleteimage',[App\Http\Controllers\PhotoController::class,'delete_image'])->name('admin_deleteimage');
     Route::post('/category_info',[App\Http\Controllers\CategoryController::class,'info'])->name('admin_category_info');
+    Route::get('/system',[App\Http\Controllers\SystemController::class,'edit'])->name('admin_system_config_edit');
+    Route::post('/system',[App\Http\Controllers\SystemController::class,'edit_post'])->name('admin_system_config_edit_post');
 
     register('lang',App\Http\Controllers\LangController::class);
     register('category',App\Http\Controllers\CategoryController::class);

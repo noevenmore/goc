@@ -8,12 +8,12 @@ class MyFunctions extends Controller
 {
     public static function work_days_to_string($work_days)
     {
-        $lang = \App::getlocale();
+        //$lang = \App::getlocale();
 
         $last_from = -1;
         $last_to = -1;
         $last_day = -1;
-        $days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+        //$days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
         $days_eng = ['Mo','Tu','We','Th','Fr','Sa','Su'];
 
         $work_days.='|99999-99999';
@@ -39,6 +39,8 @@ class MyFunctions extends Controller
 
                     if ($last_from==0 && $last_to==0)
                     {
+                        $tm = ': '.__('Day off');
+                        /*
                         if ($lang=="ua")
                         {
                             $tm = ': Вихідний';
@@ -46,10 +48,13 @@ class MyFunctions extends Controller
                         {
                             $tm = ': Day off';
                         }
+                        */
                     } else
                     {
                         if ($last_from=='00:00' && $last_to=='23:59')
                         {
+                            $tm = ': '.__('Round the clock');
+                            /*
                             if ($lang=="ua")
                             {
                                 $tm = ': Цілодобово';
@@ -57,6 +62,7 @@ class MyFunctions extends Controller
                             {
                                 $tm = ': Round the clock';
                             }
+                            */
                         } else 
                         {
                             $tm = ': '.$last_from.'-'.$last_to;
@@ -65,6 +71,9 @@ class MyFunctions extends Controller
 
                     if ($last_day==$day_num)
                     {
+                        $graph[] = __($days_eng[$last_day]).$tm;
+
+                        /*
                         if ($lang=="ua")
                         {
                             $graph[] = $days[$last_day].$tm;
@@ -72,9 +81,12 @@ class MyFunctions extends Controller
                         {
                             $graph[] = $days_eng[$last_day].$tm;
                         }
+                        */
                     }
                     else
                     {
+                        $graph[]=__($days_eng[$last_day]) . '-' . __($days_eng[$day_num]).$tm;
+                        /*
                         if ($lang=="ua")
                         {
                             $graph[]=$days[$last_day] . '-' . $days[$day_num].$tm;
@@ -82,6 +94,7 @@ class MyFunctions extends Controller
                         {
                             $graph[]=$days_eng[$last_day] . '-' . $days_eng[$day_num].$tm;
                         }
+                        */
                     }
 
                     $last_day = $i;

@@ -16,6 +16,8 @@
     
     <script src="{{ asset('js/summernote-bs4.min.js') }}" defer></script>
     <link href="{{ asset('css/summernote-bs4.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

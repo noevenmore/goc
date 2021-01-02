@@ -17,6 +17,7 @@
                 </div>
             </div>
 
+            @if (count($post->items())>0)
             <div class="row">
                 @foreach ($post->items() as $pi)
                 @if ($pi->post)
@@ -48,6 +49,9 @@
 
                 @include('pagination',['data'=>$post])
             </div>
+            @else
+            <div class="alert alert-info">Nothing</div>
+            @endif
         </div>
     </div>
 </section>

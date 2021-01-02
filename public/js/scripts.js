@@ -120,7 +120,7 @@ $(".menu_super_item").hover(function(){
 
     $(".header_submenu").css("display","block");
     $(".submenu_wrapp2").css("display","none");
-    $(".menu_super_item_"+id).css("display","block");
+    $(".menu_super_item_"+id).css("display","flex");
 });
 
 $(".header_menu-item").click(function()

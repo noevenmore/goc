@@ -34,7 +34,11 @@ class="header"
     @if(isset($images) && count($images)>0)
         style="background-image: url(/upload/images/{{$images[0]->src}});transition: background 0.2s ease;"
     @else
+        @if (isset($mp_sliders) && count($mp_sliders)>0 && isset($mp_sliders[0]->photo->src))
+        style="background-image: url(/upload/images/{{$mp_sliders[0]->photo->src}});transition: background 0.2s ease;"
+        @else
         style="background-image: url(/img/slider.jpg);transition: background 0.2s ease;"
+        @endif
     @endif
 @endif
 >
@@ -116,9 +120,22 @@ class="header"
     <div class="header_submenu">
         @foreach ($menu_items as $mi)
             @if ($mi->childrens && count($mi->childrens)>0)
-            <div class="submenu_wrapp submenu_wrapp2 menu_super_item_{{$mi->id}}">
+            <div class="submenu_wrapp submenu_wrapp2 menu_super_item_{{$mi->id}}" style="display: flex;">
                 <ul>
+                    @php
+                        $count = 0;
+                    @endphp
                     @foreach ($mi->childrens as $ch)
+                        @php
+                            $count++;
+
+                            if ($count>4)
+                            {
+                                echo '</ul><ul>';
+                                $count=0;
+                            }
+                        @endphp
+
                         <li>
                             <a href="
                             @include('layouts.menu_link',['item'=>$ch])

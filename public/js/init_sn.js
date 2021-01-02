@@ -80,3 +80,16 @@ flatpickr(".datapicker", {
   enableTime: false,
   dateFormat: "Y-m-d",
 });
+
+
+window.smInsertText = function(SN_ID,ElementID)
+{
+  /*
+  var HTMLstring = $('#'+ElementID).html();
+  $('#'+SN_ID).summernote('pasteHTML', HTMLstring);
+  */
+
+ var HTMLstring = $('#'+ElementID).html();
+ var node = $("<div></div>").html(HTMLstring)[0];
+ $('#'+SN_ID).summernote("editor.insertNode", node);
+}

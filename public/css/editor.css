@@ -1,0 +1,42 @@
+.sec_block {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #f1eeeb;
+}
+
+.sec_block .title
+{
+    font-size: 42px;
+    font-family: Palatino-Linotype;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    vertical-align: middle;
+    border-style: none;
+}
+
+.sec_block .subtitle {
+    font-family: PFSquareSansPro-Regular;
+}
+
+.sec_block .count {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}

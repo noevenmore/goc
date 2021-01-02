@@ -8,6 +8,7 @@ use App\Models\LangData;
 use App\Models\MainPageSlider;
 use App\Models\Photo;
 use App\Models\Post;
+use App\Models\System;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
@@ -71,8 +72,30 @@ class SiteController extends Controller
     public function index(Request $request)
     {
         $mp_sliders = MainPageSlider::with('info','photo')->get();
+        $event_category_id = SystemController::get_sys('category_event_id')->value;
 
-        return view('index',compact('mp_sliders'));
+        $id_list = [];
+        if ($event_category_id)
+        {
+            $id_list[]=intval($event_category_id);
+        }
+
+        $categorys = Category::where('id',$event_category_id)->with(['childrens','info','childrens.info'])->first();
+
+        if ($categorys)
+        {
+            foreach ($categorys->childrens as $cc)
+            {
+                $id_list[]=$cc->id;
+            }
+
+            $events = Post::whereIn('category_id',$id_list)->with(['info','photo','category'])->get();
+        } else
+        {
+            $events = null;
+        }
+
+        return view('index',compact('mp_sliders','event_category_id','categorys','events'));
     }
 
     public function search(Request $request)
