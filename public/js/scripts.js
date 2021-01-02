@@ -144,3 +144,14 @@ $(".main-slider").on('changed.owl.carousel',function(event){
     }
     
 })
+
+$(".cartz").on("mouseenter",function(){
+    $(this).children('.cart_img').fadeIn().css("display","block");
+    $(this).children('.cart_link').fadeIn().css("background-color","#fff");
+});
+
+$(".cartz").on("mouseleave",function()
+{
+    $(this).children('.cart_img').hide();
+    $(this).children('.cart_link').fadeIn().css("background-color","transparent");
+});

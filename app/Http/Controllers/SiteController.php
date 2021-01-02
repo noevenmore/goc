@@ -73,6 +73,7 @@ class SiteController extends Controller
     {
         $mp_sliders = MainPageSlider::with('info','photo')->get();
         $event_category_id = SystemController::get_sys('category_event_id')->value;
+        $category_publication_id = SystemController::get_sys('category_publication_id')->value;
 
         $id_list = [];
         if ($event_category_id)
@@ -95,7 +96,11 @@ class SiteController extends Controller
             $events = null;
         }
 
-        return view('index',compact('mp_sliders','event_category_id','categorys','events'));
+        $main_page_categorys = Category::where('is_show_main',true)->with(['info','photo'])->get();
+
+        $publications = Post::where('category_id',$category_publication_id)->with(['info','photo'])->limit(6)->get();
+    
+        return view('index',compact('mp_sliders','publications','event_category_id','category_publication_id','categorys','events','main_page_categorys'));
     }
 
     public function search(Request $request)

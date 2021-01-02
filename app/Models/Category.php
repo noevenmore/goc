@@ -23,4 +23,9 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Category','parent_id','id');
     }
+
+    public function photo()
+    {
+        return $this->hasMany('App\Models\Photo','data_id','id')->where('type','category');
+    }
 }

@@ -98,7 +98,6 @@
     "Famous people of our city":"Визначні особи нашого міста",
     "Urgent Services":"Термінові служби",
     "Tourist Safety":"Беспека туриста",
-    "Publications":"Публікації",
     "Travel agencies":"Туристичні фірми",
     "Photo Gallery":"Фотогалерея",
     "All seasons":"Усі пори року",
@@ -144,5 +143,7 @@
     "Done!":"Виконано!",
     "Reviews":"Відгуки",
     "New ones first":"Спочатку нові",
-    "At first old":"Спочатку старі"
+    "At first old":"Спочатку старі",
+    "Publications":"Публикації",
+    "Show more publications":"Більше публикацій"
 }
