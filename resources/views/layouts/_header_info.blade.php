@@ -129,7 +129,11 @@
 
                 <div class="advantages_item advantages_item--social" style="width: auto;">
                     @if ($post->category->is_show_link)
-                        <a href="{{$post->link}}">{{__('Link on site')}}</a>
+                        @php
+                            $link_on_booking = stripos($post->link,'booking.');
+                        @endphp
+
+                        <a href="{{$post->link}}">{{$link_on_booking?__('Link on booking.com'):__('Link on site')}}</a>
                     @endif
 
                     <a href="#" class="advantages_img my-auto">
