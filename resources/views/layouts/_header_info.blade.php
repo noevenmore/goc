@@ -137,9 +137,11 @@
                     @endif
 
                     @foreach ($social_links as $sl)
+                    @if (strlen($sl->url)>0)
                         <a href="{{$sl->url}}" class="advantages_img my-auto">
                             <img src="{{$sl->parent->photo?"/upload/images/".$sl->parent->photo->src:"/img/no-images.png"}}" alt="">
                         </a>
+                    @endif
                     @endforeach
                 </div>
             </div>

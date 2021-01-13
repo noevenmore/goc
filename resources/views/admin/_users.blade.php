@@ -31,6 +31,15 @@
         'readonly'=>true,
     ])
 
+    @include('admin._el',[
+        'type'=>'text',
+        'title'=>'Почта:',
+        'name'=>'email',
+        'value'=>isset($data->email)?$data->email:'',
+        'placeholder'=>'Введите значение...',
+        'readonly'=>true,
+    ])
+
     <button class="btn btn-primary" type="submit">Ок</button>
 </form>
 

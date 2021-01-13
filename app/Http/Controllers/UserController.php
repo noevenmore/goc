@@ -19,7 +19,7 @@ class UserController extends Controller
     public function save_event_from_request($event,Request $request)
     {
         $event->type = $this->get_param('type','user',$request);
-        $event->name = $this->get_param('name','',$request);
+        //$event->name = $this->get_param('name','',$request);
 
         $event->save();
     }
