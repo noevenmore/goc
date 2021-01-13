@@ -1,19 +1,3 @@
-<!--
-Types:
-text
-number
-check
-mtext
-
-Param:
-title
-name
-value
-placeholder
-selected_value
--->
-
-
 @switch($type)
     @case('id')
         <input type="number" name="id" value="{{isset($value)?$value:''}}" hidden>
@@ -31,8 +15,13 @@ selected_value
             <input
             @isset ($id)
             id = "{{$id}}"
-            @endif
-            type="{{$type}}" name="{{$name}}" class="form-control {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}" value="{{isset($value)?$value:''}}">
+            @endisset
+            type="{{$type}}" name="{{$name}}" class="form-control {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}" value="{{isset($value)?$value:''}}"
+            
+            @isset ($readonly)
+            readonly
+            @endisset
+            >
         </div>
     @break
     
@@ -42,8 +31,12 @@ selected_value
             <textarea
             @isset ($id)
             id = "{{$id}}"
-            @endif
-            name="{{$name}}"  class="form-control {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}">{{isset($value)?$value:''}}</textarea>
+            @endisset
+            name="{{$name}}"  class="form-control {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}"
+            @isset ($readonly)
+            readonly
+            @endisset
+            >{{isset($value)?$value:''}}</textarea>
         </div>
     @break
 
@@ -53,8 +46,12 @@ selected_value
             <textarea 
             @isset ($id)
             id = "{{$id}}"
-            @endif
-            name="{{$name}}" class="summernote {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}">{{isset($value)?$value:''}}</textarea>
+            @endisset
+            name="{{$name}}" class="summernote {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}"
+            @isset ($readonly)
+            readonly
+            @endisset
+            >{{isset($value)?$value:''}}</textarea>
         </div>
     @break
 
@@ -64,8 +61,13 @@ selected_value
             <input
             @isset ($id)
             id = "{{$id}}"
-            @endif
-            type="{{$type}}" name="{{$name}}" class="form-control {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}" value="{{isset($value)?$value:'0'}}">
+            @endisset
+            type="{{$type}}" name="{{$name}}" class="form-control {{isset($class)?$class:''}}" placeholder="{{isset($placeholder)?$placeholder:''}}" value="{{isset($value)?$value:'0'}}"
+            
+            @isset ($readonly)
+            readonly
+            @endisset
+            >
         </div>
     @break
 
@@ -74,8 +76,13 @@ selected_value
             <input
             @isset ($id)
             id = "{{$id}}"
-            @endif
-            class="form-check-input {{isset($class)?$class:''}}" type="checkbox" value="{{isset($value)?$value:''}}" name="{{$name}}" {{(isset($checked) && $checked)?'checked':''}}>
+            @endisset
+            class="form-check-input {{isset($class)?$class:''}}" type="checkbox" value="{{isset($value)?$value:''}}" name="{{$name}}" {{(isset($checked) && $checked)?'checked':''}}
+            
+            @isset ($readonly)
+            readonly
+            @endisset
+            >
             <label class="form-check-label">{{$title}}</label>
         </div>
     @break
@@ -86,8 +93,13 @@ selected_value
             <select 
             @isset ($id)
             id = "{{$id}}"
-            @endif
-            class="form-control {{isset($class)?$class:''}}" name="{{$name}}">
+            @endisset
+            class="form-control {{isset($class)?$class:''}}" name="{{$name}}"
+            
+            @isset ($readonly)
+            readonly
+            @endisset
+            >
                 <option value="">-не выбрано-</option>
                 @foreach ($list as $el)
                     <option value="{{$el['value']}}" {{isset($value)&&$value==$el['value']?'selected':''}}>{{$el['title']}}</option>

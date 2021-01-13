@@ -134,6 +134,7 @@
         </div>
     </div>
 
+    @include('admin._social')
     @include('admin._seo')
 
     <button class="btn btn-primary" type="submit">Ок</button>

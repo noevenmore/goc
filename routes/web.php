@@ -25,6 +25,8 @@ Route::prefix('admin')->group(function () {
     register('post',App\Http\Controllers\PostController::class);
     register('menu_item',App\Http\Controllers\MenuItemController::class);
     register('mp_slider',App\Http\Controllers\MainPageSliderController::class);
+    register('users',App\Http\Controllers\UserController::class);
+    register('social_links',App\Http\Controllers\SocialLinksController::class);
 });
 
 Route::get('/',[\App\Http\Controllers\SiteController::class,'index'])->name('index');
@@ -36,3 +38,10 @@ Route::get('/map',[\App\Http\Controllers\SiteController::class,'map'])->name('ma
 Route::get('/search',[\App\Http\Controllers\SiteController::class,'search'])->name('search');
 
 Auth::routes();
+
+/*
+FOR DEV ONLY
+*/
+Route::prefix('test')->group(function () {
+    Route::get('/make_root',[\App\Http\Controllers\TestController::class,'make_root']);
+});

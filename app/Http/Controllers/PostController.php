@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\MyFunctions;
 use App\Http\Controllers\PhotoController;
 use App\Models\Photo;
+use App\Models\SocialLinkData;
+use App\Models\SocialLinks;
 
 class PostController extends Controller
 {
@@ -53,6 +55,25 @@ class PostController extends Controller
         $event->seo_keywords = $this->get_param('seo_keywords','',$request);
         $event->seo_og_image = $this->get_param('seo_og_image','',$request);
         $event->seo_meta_twitter_image = $this->get_param('seo_meta_twitter_image','',$request);
+
+        $social = SocialLinks::get();
+
+        foreach ($social as $s)
+        {
+            $d = SocialLinkData::where(['type'=>'post','data_id'=>$event->id,'social_link_id'=>$s->id])->first();
+            
+            if (!$d)
+            {
+                $d = new SocialLinkData;
+                $d->type='post';
+                $d->data_id = $event->id;
+                $d->social_link_id = $s->id;
+            }
+
+            $d->url = $this->get_param('social_'.$s->id,'',$request);
+
+            $d->save();
+        }
 
         $event->save();
 
@@ -109,7 +130,9 @@ class PostController extends Controller
             $images_list = $images_list . $ph->src . ';';
         }
 
-        return view('admin._post',compact('link','categorys','langs','images_list'));
+        $social = SocialLinks::get();
+
+        return view('admin._post',compact('link','categorys','langs','social','images_list'));
     }
 
     public function add_post(Request $request)
@@ -149,7 +172,15 @@ class PostController extends Controller
 
         $link=route('admin_post_edit_post');
 
-        return view('admin._post',compact('data','link','categorys','langs','param','images_list'));
+        $social = SocialLinks::get();
+        $sl = SocialLinkData::where(['type'=>'post','data_id'=>$id])->with('parent')->get();
+
+        foreach ($sl as $s)
+        {
+            $param['social_'.$s->parent->id]=$s->url;
+        }
+
+        return view('admin._post',compact('data','link','categorys','langs','param','images_list','social'));
     }
 
     public function edit_post(Request $request)

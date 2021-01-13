@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class isAdmin
+class isRoot
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Gate::allows('isAdmin'))
+        if (Gate::allows('isRoot'))
         {
             return $next($request);
         } else

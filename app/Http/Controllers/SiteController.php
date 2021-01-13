@@ -8,6 +8,7 @@ use App\Models\LangData;
 use App\Models\MainPageSlider;
 use App\Models\Photo;
 use App\Models\Post;
+use App\Models\SocialLinkData;
 use App\Models\System;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -65,8 +66,9 @@ class SiteController extends Controller
 
         $images = Photo::where(['type'=>'post','data_id'=>$id])->orderBy('is_main', 'desc')->get();
         $work_times = MyFunctions::work_days_to_string($post->work_times);
+        $social_links = SocialLinkData::where(['type'=>'post','data_id'=>$id])->with(['parent','parent.photo'])->get();
 
-        return view('post',compact('post','images','work_times'));
+        return view('post',compact('post','images','work_times','social_links'));
     }
 
     public function index(Request $request)

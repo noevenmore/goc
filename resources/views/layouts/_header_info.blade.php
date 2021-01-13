@@ -136,12 +136,11 @@
                         <a href="{{$post->link}}">{{$link_on_booking?__('Link on booking.com'):__('Link on site')}}</a>
                     @endif
 
-                    <a href="#" class="advantages_img my-auto">
-                        <img src="/img/insta1.png" alt="">
-                    </a>
-                    <a href="#" class="advantages_img my-auto">
-                        <img src="/img/fb1.png" alt="">
-                    </a>
+                    @foreach ($social_links as $sl)
+                        <a href="{{$sl->url}}" class="advantages_img my-auto">
+                            <img src="{{$sl->parent->photo?"/upload/images/".$sl->parent->photo->src:"/img/no-images.png"}}" alt="">
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>

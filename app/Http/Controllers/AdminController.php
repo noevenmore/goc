@@ -9,7 +9,7 @@ class AdminController extends Controller
     public function __construct()
     {
         // Only admin access
-        $this->middleware('auth');
+        $this->middleware('not_simple_user');
     }
 
     public function index(Request $request)
