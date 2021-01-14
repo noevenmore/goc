@@ -56,6 +56,8 @@ class PostController extends Controller
         $event->seo_og_image = $this->get_param('seo_og_image','',$request);
         $event->seo_meta_twitter_image = $this->get_param('seo_meta_twitter_image','',$request);
 
+        $event->save();
+
         $social = SocialLinks::get();
 
         foreach ($social as $s)
@@ -74,8 +76,6 @@ class PostController extends Controller
 
             $d->save();
         }
-
-        $event->save();
 
         $langs = Lang::get();
 
